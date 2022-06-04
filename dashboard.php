@@ -1,4 +1,7 @@
-<?php include('frontend-partials/menu.php'); ?>
+<?php require('frontend-partials/menuForDashboard.php');
+
+require_once 'checkUserLogin.php';
+?>
 
 
 <!-- Hostel Search Section Starts Here -->
@@ -12,8 +15,6 @@
     </div>
 </section>
 <!-- Hostel sEARCH Section Ends Here -->
-
-
 
 <!-- Hostel MEnu Section Starts Here -->
 <section class="hostel-menu">
