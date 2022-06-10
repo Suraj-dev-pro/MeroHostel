@@ -36,12 +36,12 @@
                      <table class="tbl-30">
                          <tr>
                             <td>Full Name:</td>
-                             <td><input type="text" name="full_name" placeholder="Enter Full Name" value="<?php echo $full_name?>"></td>
+                             <td><input type="text" name="full_name" placeholder="Enter Full Name" value="<?php echo $full_name?>"required/></td>
                          </tr>
                          <tr>
                              <td>Username:</td>
                              <td>
-                             <input type="text" name="username" placeholder="Enter Username" value="<?php echo $username?>"></td>
+                             <input type="text" name="username" placeholder="Enter Username" value="<?php echo $username?>"required/></td>
                              </td>
                          </tr>
                         <tr>
