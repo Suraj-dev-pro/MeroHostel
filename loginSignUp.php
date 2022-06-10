@@ -17,8 +17,6 @@
         <!-- Login -->
         <form method="POST" action="login.php" class="form" id="login">
 
-
-
             <h1 class="formTitle">Login</h1>
 
             <div class="formMessage formMessageError">
@@ -124,9 +122,11 @@
             </p>
 
         </form>
+        
     </div>
 
     <script src="loginSignUp.js"></script>
+    
 </body>
 
 </html>

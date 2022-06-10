@@ -1,6 +1,6 @@
-
-
-<?php include('config/constants.php'); ?>
+<?php include('config/constants.php');
+require_once('checkUserLogin.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +12,8 @@
     <title>homepage</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/homepage.js" type="stylesheet"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -28,12 +30,9 @@
                     <li>
                         <a href="<?php SITEURL; ?>index.php">Home</a>
                     </li>
-                    <li>
-                        <a href="<?php echo SITEURL; ?>aboutus.html">About Us</a>
-                    </li>
 
                     <li>
-                        <a href="<?php echo SITEURL; ?>loginSignUp.php">Login</a>
+                        <a href="<?php echo SITEURL; ?>aboutus.html">About Us</a>
                     </li>
 
                     <li>

@@ -1,5 +1,6 @@
 <?php 
     include('../config/constants.php');
+    include('login-check.php');
 ?>
 
 
@@ -21,6 +22,7 @@
                     <li><a href="manage-admin.php">Admin</a></li>
                     <li><a href="manage-hostel.php">Hostel</a></li>
                     <li><a href="manage-booking.php">Book Now</a></li>
+                    <li><a href="user-details.php">User Details</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul>
             </div>

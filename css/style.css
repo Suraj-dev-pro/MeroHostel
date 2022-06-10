@@ -173,10 +173,6 @@ label{
 }
 
 
-
-
-
-
 /* CSS for Social */
 .footer{
     background-color:#240c45;
@@ -245,3 +241,10 @@ label{
     }
    
 }
+
+.hostel-menu-desc .hiddenTag {
+    display: none;
+}
+
+/* Modal styling */
+

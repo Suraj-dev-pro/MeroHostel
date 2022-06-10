@@ -18,12 +18,12 @@
        
          $password = md5($_POST['password']);//Password Encryption with md5
       }
-      if(empty($_POST['username'])){
-          $showError="Please Enter username";
-        }else{
-            
-            $username = $_POST['username'];
+
+        if (empty($_POST["username"])) {
+
+            $showError = "Name is required.";
         }
+
         
 
 

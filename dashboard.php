@@ -1,5 +1,6 @@
-<?php require('frontend-partials/menuForDashboard.php');
+<?php
 
+require('frontend-partials/menuForDashboard.php');
 require_once 'checkUserLogin.php';
 ?>
 
@@ -21,6 +22,10 @@ require_once 'checkUserLogin.php';
     <div class="container">
         <h2 class="text-center">Hostels</h2>
 
+        <script>
+            var butt;
+        </script>
+
         <?php
         //getting from hostel database
         $sql = "SELECT * FROM hostels where booked='no'";
@@ -31,6 +36,8 @@ require_once 'checkUserLogin.php';
         //Count Rows
         $count = mysqli_num_rows($res);
 
+        $hostel_ids = [];
+
         //CHeck whether the Hostels are availalable or not
         if ($count > 0) {
             //we have hostel in database
@@ -38,6 +45,7 @@ require_once 'checkUserLogin.php';
             while ($row = mysqli_fetch_assoc($res)) {
                 //get the value from individual columns
                 $id = $row['id'];
+                array_push($hostel_ids, $id);
                 $image_name = $row['image_name'];
                 $name = $row['name'];
                 $price = $row['price'];
@@ -63,7 +71,10 @@ require_once 'checkUserLogin.php';
                         }
                         ?>
                     </div>
-                    <div class="hostel-menu-desc">
+                    <script>
+                        var hostelId = 0;
+                    </script>
+                    <div class="hostel-menu-desc" >
                         <h4><?php echo $name; ?></h4>
 
                         <p><label for="price">Price: </label><?php echo $price; ?></p>
@@ -76,12 +87,16 @@ require_once 'checkUserLogin.php';
 
                         <p><label for="description">Description: </label><?php echo $description; ?></p>
 
+                        <p><span class="hiddenTag"></span></p>
+
                         <div class="button">
-                            <a href="<?php echo SITEURL; ?>book.php" class="btn btn-primary">Book Hostel</a>
+                            <button id="myBtn" class="btn btn-primary book-btn" onclick="location.href='confirm.php?id=<?php echo $id; ?>'">Book Hostel</button>
                         </div>
 
                     </div>
                 </div>
+
+
         <?php
             }
         } else {
@@ -96,6 +111,9 @@ require_once 'checkUserLogin.php';
     </div>
 
 </section>
+
+
+
 <!-- hostel Menu Section Ends Here -->
 
 <?php include('frontend-partials/footer.php'); ?>
