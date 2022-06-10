@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +21,7 @@
             <h3>Booking successful</h3>
             <br>
             <label>Please enter the check in date</label>
-            <input type="date" id="checkDate" name="date" >
+            <input type="date" id="checkDate" name="date">
 
             <button class="btn btn-primary" id="confirmButton">Confirm</button>
 
@@ -39,7 +38,7 @@
         var confirm = document.getElementById('confirmButton');
         confirm.addEventListener("click", function() {
 
-            if(checkingDate.value === '') {
+            if (checkingDate.value === '') {
                 alert('Please select your checkin date');
                 return;
             }
@@ -48,13 +47,12 @@
             xhr.onreadystatechange = () => {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
-console.log(xhr.responseText);
-                        if(xhr.responseText == '0') {
+                        console.log(xhr.responseText);
+                        if (xhr.responseText == '0') {
                             alert("booking failed");
-                        }
-                        else {
-                        document.getElementById('success').innerHTML = alert("Successfully Booked");
-                        location.replace("dashboard.php");
+                        } else {
+                            document.getElementById('success').innerHTML = alert("Successfully Booked");
+                            location.replace("dashboard.php");
                         }
                     } else {
                         document.getElementById('success').innerHTML = 'Booking Failed';

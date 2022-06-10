@@ -73,7 +73,7 @@ table tr td{
 /* Css for menu */
 .menu{
     text-align: center;
-    background-color:#6a00ff;
+    background-color:#240c45;
     
 }
 
@@ -104,10 +104,13 @@ table tr td{
 
 /* Css for footer */
 .footer{
-    background-color:#240c45;
-    color: #240c45;
+    background-color: #240c45;
+    text-align: center;
 }
 
+.footer p {
+    color: white;
+}
 
 /* Css for logins */
 .login{
@@ -117,3 +120,4 @@ table tr td{
     padding: 2%;
     margin:10% auto;
 }
+

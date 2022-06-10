@@ -27,7 +27,7 @@
                 <!--login form starts here-->
           <form action="" method="post">
               Username:<br>
-               <input type="text" name="username"placeholder="Enter your username"><br><br>
+               <input type="text" name="username"placeholder="Enter your username" ><br><br>
 
               Password:<br>
                <input type="password" name="password" id="myPass" placeholder="Enter your password">

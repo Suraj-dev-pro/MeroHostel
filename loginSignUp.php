@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="loginSignUp.css">
     <!-- <link rel="stylesheet" href="" -->
 
+    <script src="password.js"></script>
 </head>
 
 <body>
@@ -31,7 +32,8 @@
 
             <div class="formInputGroup password">
 
-                <input type="password" name="Password" class="formInput" placeholder="Password">
+                <input type="password" name="Password" id="myPass" class="formInput" placeholder="Password">
+                <input type="checkbox" onclick="myFunction()">unhide
 
                 <div class="formInputErrorMessage" id="errPassword"></div>
             </div>
@@ -39,7 +41,7 @@
             <div class="form-group">
 
                 <input type="checkbox" name="remember" value="remember">Remember me
-                
+
             </div>
 
             <button class="formButton" name="login" type="submit">Login</button>
@@ -122,11 +124,11 @@
             </p>
 
         </form>
-        
+
     </div>
 
     <script src="loginSignUp.js"></script>
-    
+
 </body>
 
 </html>
