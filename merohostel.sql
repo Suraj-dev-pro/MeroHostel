@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2022 at 06:13 AM
+-- Generation Time: Jun 28, 2022 at 04:42 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -61,7 +61,21 @@ CREATE TABLE `booking_details` (
 
 INSERT INTO `booking_details` (`booking_id`, `customer_id`, `hostel_id`, `checkin_date`) VALUES
 (1, 1, 34, '2022-06-26'),
-(2, 1, 31, '2022-06-29');
+(2, 1, 31, '2022-06-29'),
+(3, 1, 35, '2022-06-27'),
+(4, 1, 35, '2022-06-27'),
+(5, 1, 32, '2022-06-30');
+
+--
+-- Triggers `booking_details`
+--
+DELIMITER $$
+CREATE TRIGGER `bookingUpdated` AFTER INSERT ON `booking_details` FOR EACH ROW begin 
+UPDATE hostels set booked = "yes"
+WHERE id = new.hostel_id;
+end
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -110,7 +124,7 @@ CREATE TABLE `hostels` (
 
 INSERT INTO `hostels` (`id`, `image_name`, `name`, `price`, `address`, `contact`, `type`, `booked`, `description`) VALUES
 (31, 'Hostel-Name-3930.jpg', 'Garima Hostel', '18000', 'Pulchowk', '9862331929', 'girls', 'no', '1 seater'),
-(32, 'Hostel-Name-4413.jpg', 'Bhaktapur House', '9000', 'Thimi,Bhaktapur', '9847569788', 'boys', 'no', '6 seater '),
+(32, 'Hostel-Name-4413.jpg', 'Bhaktapur House', '9000', 'Thimi,Bhaktapur', '9847569788', 'boys', 'yes', '6 seater '),
 (33, 'Hostel-Name-9890.jpg', 'Bhibhuti Girls Hostel', '12000', 'Kupandol,Lalitpur', '9847569788', 'girls', 'yes', '3 seater'),
 (34, 'Hostel-Name-2671.jpg', 'Holmo Home', '8000', 'Boudha,Kathmadnu', '9847569788', 'boys', 'no', '2 seater'),
 (35, 'Hostel-Name-4938.jpg', 'Kusang Boys Home', '9000', 'Sankhamul,Kathmandu', '9847569788', 'boys', 'no', '3seater'),
@@ -160,7 +174,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `booking_details`
 --
 ALTER TABLE `booking_details`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customer`
