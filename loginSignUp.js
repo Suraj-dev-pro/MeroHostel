@@ -25,7 +25,7 @@ formvalid.addEventListener("submit", (e) => {
     error++;
     document.getElementById("errPassword").innerHTML =
       "Password cannot be empty";
-  } else if (pInput.value.length <= 6) {
+  } else if (pInput.value.length < 6) {
     error++;
     document.getElementById("errPassword").innerText =
       "Password must be longer than 6 characters";
@@ -98,7 +98,7 @@ formReg.addEventListener("submit", (e) => {
     error++;
     document.getElementById("eerrPassword").innerHTML =
       "Password cannot be empty";
-  } else if (pwCheck.value.length <= 6) {
+  } else if (pwCheck.value.length < 6) {
     error++;
     document.getElementById("eerrPassword").innerText =
       "Password must be longer than 6 characters";
@@ -118,7 +118,7 @@ formReg.addEventListener("submit", (e) => {
       "Enter confirm password";
   }
 
-  if (reCheck.value != pwCheck.value) {
+  if (reCheck.value !== pwCheck.value) {
     error++;
     document.getElementById("eerrorRePassword").innerText =
       "Password and Confirm password must be same.";

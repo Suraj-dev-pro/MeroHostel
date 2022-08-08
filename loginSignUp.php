@@ -60,6 +60,7 @@
         <!-- SignUp -->
         <form method="post" action="register.php" class="form formHidden" id="createAccount">
 
+
             <h1 class="formTitle">Create Account</h1>
             <div class="formMessage formMessageError">
 

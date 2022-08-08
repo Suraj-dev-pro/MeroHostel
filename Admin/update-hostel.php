@@ -2,41 +2,37 @@
 
 <?php
 //check whether id is set or not
-    if (isset($_GET['id'])) 
-    {
-        //get all the details 
-        $id = $_GET['id'];
+if (isset($_GET['id'])) {
+    //get all the details 
+    $id = $_GET['id'];
 
-        //sql query to get the selected hostels
-        $sql2 = "SELECT * FROM hostels where id=$id";
-        //execute the query
-        $res2 = mysqli_query($conn, $sql2);
-        //get the value based on the query executed
-        $row2 = mysqli_fetch_assoc($res2);
+    //sql query to get the selected hostels
+    $sql2 = "SELECT * FROM hostels where id=$id";
+    //execute the query
+    $res2 = mysqli_query($conn, $sql2);
+    //get the value based on the query executed
+    $row2 = mysqli_fetch_assoc($res2);
 
-        //get the individual values of selected hostel
-        
-        $current_image = $row2['image_name'];
-        $name = $row2['name'];
-        $price = $row2['price'];
-        $address = $row2['address'];
-        $contact = $row2['contact'];
-        $type = $row2['type'];
-        $booked = $row2['booked'];
-        $description = $row2['description'];
-       
-    }
-    else
-    {
+    //get the individual values of selected hostel
+
+    $current_image = $row2['image_name'];
+    $name = $row2['name'];
+    $price = $row2['price'];
+    $address = $row2['address'];
+    $contact = $row2['contact'];
+    $type = $row2['type'];
+    $booked = $row2['booked'];
+    $description = $row2['description'];
+} else {
     //redirect to manage hostel
-        header('Location:'.SITEURL.'admin/manage-hostel.php');
-    }
+    header('Location:' . SITEURL . 'admin/manage-hostel.php');
+}
 ?>
 <div class="main-content">
     <div class="wrapper">
         <h1>Update Hostel</h1>
         <br><br>
-        <form action="" method="post" enctype="multipart/form" required>
+        <form action="" method="post" enctype="multipart/form-data" required>
             <table class="tbl-30">
                 <tr>
                     <td>Current Image:</td>
@@ -90,7 +86,7 @@
                         Contact:
                     </td>
                     <td>
-                        <input type="number" name="contact" value="<?php echo $contact; ?>" >
+                        <input type="number" name="contact" value="<?php echo $contact; ?>">
                     </td>
                 </tr>
                 <tr>
@@ -98,8 +94,12 @@
                         Type:
                     </td>
                     <td>
-                        <input <?php if ($type == "boys") {echo "checked"; } ?> type="radio" name="type" value="boys">Boys' Hostel
-                        <input <?php if ($type == "girls") {echo "checked";} ?> type="radio" name="type" value="girls">Girls' Hostel
+                        <input <?php if ($type == "boys") {
+                                    echo "checked";
+                                } ?> type="radio" name="type" value="boys">Boys' Hostel
+                        <input <?php if ($type == "girls") {
+                                    echo "checked";
+                                } ?> type="radio" name="type" value="girls">Girls' Hostel
                     </td>
                 </tr>
                 <tr>
@@ -107,8 +107,12 @@
                         Booked:
                     </td>
                     <td>
-                        <input <?php if ($type == "yes") {echo "checked"; } ?> type="radio" name="booked" value="yes">yes
-                        <input <?php if ($type == "no") {echo "checked";} ?> type="radio" name="booked" value="no">no
+                        <input <?php if ($type == "yes") {
+                                    echo "checked";
+                                } ?> type="radio" name="booked" value="yes">yes
+                        <input <?php if ($type == "no") {
+                                    echo "checked";
+                                } ?> type="radio" name="booked" value="no">no
                     </td>
                 </tr>
                 <tr>
@@ -119,7 +123,7 @@
                         <textarea name="description" cols="22" rows="3" value="<?php echo $description; ?>"></textarea>
                     </td>
                 </tr>
-               
+
 
                 <tr>
                     <td>
@@ -132,7 +136,7 @@
             </table>
         </form>
 
-    <?php
+        <?php
 
         //check whether the button is clicked or not
         if (isset($_POST['submit'])) {
@@ -144,9 +148,9 @@
             $address = $_POST['address'];
             $contact = $_POST['contact'];
             $type = $_POST['type'];
-            $booked= $_POST['booked'];
+            $booked = $_POST['booked'];
             $description = $_POST['description'];
-           
+
 
 
             //2.upload the image if selected
@@ -184,7 +188,7 @@
                         //failed to upload the image
                         //Redirect to add hostel page with error message
                         $_session['upload'] = "<div class='error'>Failed to upload the image.</div>";
-                        header('Location:'.SITEURL. 'admin/add-hostel.php');
+                        header('Location:' . SITEURL . 'admin/add-hostel.php');
 
                         //stop the process
                         die();
@@ -202,19 +206,15 @@
                             //failed to remove current_image
                             $_SESSION['remove-failed'] = "<div class='error'>Failed to remove current image.</div>";
                             //redirect to manage hostel
-                            header('Location:'.SITEURL.'admin/manage-hostel.php');
+                            header('Location:' . SITEURL . 'admin/manage-hostel.php');
                             //stop process
                             die();
                         }
                     }
-                } 
-                else 
-                {
+                } else {
                     $image_name = $current_image; //setting the default image when image is not selected
                 }
-            }
-            else
-            {
+            } else {
                 $image_name = $current_image; //Default Image when Button is not Clicked
             }
             // update in database

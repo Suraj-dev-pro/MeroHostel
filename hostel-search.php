@@ -66,9 +66,11 @@
                         <p><label for="address">Contact: </label><?php echo $contact; ?></p>
                         <p><label for="address">Type: </label><?php echo $type; ?></p>
                         <p><label for="description">Description: </label><?php echo $description; ?></p>
-                        <div class="button">
-                            <a href="<?php echo SITEURL; ?>book.php" class="btn btn-primary">Book Hostel</a>
-                        </div>
+                        <?php if (isset($_SESSION['user_id'])) { ?>
+                            <div class="button">
+                                <a href="<?php echo SITEURL; ?>book.php" class="btn btn-primary">Book Hostel</a>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
         <?php
