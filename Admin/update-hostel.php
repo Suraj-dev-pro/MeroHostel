@@ -27,6 +27,145 @@ if (isset($_GET['id'])) {
     //redirect to manage hostel
     header('Location:' . SITEURL . 'admin/manage-hostel.php');
 }
+
+// Validate
+$err = [];
+if (isset($_POST['submit'])) {
+
+    if (!isset($_FILES['image'])) {
+        $err['image'] = "Choose an image";
+    }
+
+    function validateField($name)
+    {
+        return isset($_POST["$name"]) && !empty(trim($_POST["$name"]));
+    }
+
+    if (!validateField("name")) {
+        $err['name'] = "Enter the name of the hostel";
+    }
+    if (!validateField("price")) {
+        $err['price'] = "Enter the price";
+    }
+    if (!validateField("address")) {
+        $err['address'] = "Enter the address";
+    }
+    if (!validateField("contact") || !preg_match("/^[0-9]{10}+$/", $_POST["contact"])) {
+        $err['contact'] = "Enter the contact";
+    }
+
+    if (empty($_POST['description'])) {
+        $err['description'] = "Description is mandatory";
+    }
+
+    if (!count($err)) {
+
+        //1. get data from form
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        $address = $_POST['address'];
+        $contact = $_POST['contact'];
+        $type = $_POST['type'];
+        $booked = $_POST['booked'];
+        $description = $_POST['description'];
+
+
+
+        //2.upload the image if selected
+        //check whether the upload button is clicked or not
+        if (isset($_FILES['image']['name'])) {
+            //get the details of the selected image
+            $image_name = $_FILES['image']['name']; //new image name
+
+            //check if the image is available or not
+            if ($image_name != "") {
+                //image is available
+                //i. uploading new image
+                //get the details of the selected image(jpg,png,gif,etc)
+                $ext = end(explode('.', $image_name));
+
+
+                //create new name for the selected image
+                $image_name = "Hostel-Name-" . rand(0000, 9999) . '.' . $ext; //this will be renamed image
+
+                //2. upload the image
+                //get the src path and destination path
+
+                //source path is the current working directory of the image
+                $src_path = $_FILES['image']['tmp_name'];
+
+                //destination path for the image to be uploaded
+                $dest_path = "../images/hostel/" . $image_name;
+
+                //finally upload the hostel image
+                $upload = move_uploaded_file($src_path, $dest_path);
+
+                //check whether the image uploaded or not
+
+                if ($upload == false) {
+                    //failed to upload the image
+                    //Redirect to add hostel page with error message
+                    $_session['upload'] = "<div class='error'>Failed to upload the image.</div>";
+                    header('Location:' . SITEURL . 'admin/add-hostel.php');
+
+                    //stop the process
+                    die();
+                }
+                //remove the image if new image is uploaded and current_image exists
+                //remove current_image if available
+                if ($current_image != "") {
+                    //current image is available
+                    //remove the image
+                    $remove_path = "../images/hostel/" . $current_image;
+
+                    $remove = unlink($remove_path);
+                    //check whether the image is removed or not
+                    if ($remove == false) {
+                        //failed to remove current_image
+                        $_SESSION['remove-failed'] = "<div class='error'>Failed to remove current image.</div>";
+                        //redirect to manage hostel
+                        header('Location:' . SITEURL . 'admin/manage-hostel.php');
+                        //stop process
+                        die();
+                    }
+                }
+            } else {
+                $image_name = $current_image; //setting the default image when image is not selected
+            }
+        } else {
+            $image_name = $current_image; //Default Image when Button is not Clicked
+        }
+        // update in database
+
+        $sql3 = "UPDATE  hostels SET
+                image_name = '$image_name',
+                name = '$name',
+                price = $price,
+                address= '$address',
+                contact = $contact,
+                type='$type',
+                booked = '$booked',
+                description = '$description'
+                
+                WHERE id = $id
+        ";
+        //execute query
+        $res3 = mysqli_query($conn, $sql3);
+        //check whether the query is executed or not
+        if ($res3 == true) {
+            //query executed successfully
+            $_SESSION['update'] = "<div class='success'>Hostel updated Successfully</div>";
+            header('Location:' . SITEURL . 'admin/manage-hostel.php');
+        } else {
+            //Failed to update hostel
+            $_SESSION['update'] = "<div class='error'>Failed to update hostel</div>";
+            header('Location:' . SITEURL . 'admin/manage-hostel.php');
+        }
+    }
+
+
+}
 ?>
 <div class="main-content">
     <div class="wrapper">
@@ -55,6 +194,9 @@ if (isset($_GET['id'])) {
                     <td>Select New Image:</td>
                     <td>
                         <input type="file" name="image">
+                        <?php if (isset($err['image'])) { ?>
+                            <span><?php echo $err['image']; ?></span>
+                        <?php } ?>
                     </td>
                 </tr>
                 <tr>
@@ -63,6 +205,7 @@ if (isset($_GET['id'])) {
                     </td>
                     <td>
                         <input type="text" name="name" value="<?php echo $name; ?>">
+                        <span><?php if (isset($err['name'])) echo $err['name']; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -71,6 +214,7 @@ if (isset($_GET['id'])) {
                     </td>
                     <td>
                         <input type="number" name="price" value="<?php echo $price; ?>">
+                        <span><?php if (isset($err['price'])) echo $err['price']; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -79,6 +223,7 @@ if (isset($_GET['id'])) {
                     </td>
                     <td>
                         <input type="text" name="address" value="<?php echo $address; ?>">
+                        <span><?php if (isset($err['address'])) echo $err['address']; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -87,6 +232,7 @@ if (isset($_GET['id'])) {
                     </td>
                     <td>
                         <input type="number" name="contact" value="<?php echo $contact; ?>">
+                        <span><?php if (isset($err['contact'])) echo $err['contact']; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -100,6 +246,7 @@ if (isset($_GET['id'])) {
                         <input <?php if ($type == "girls") {
                                     echo "checked";
                                 } ?> type="radio" name="type" value="girls">Girls' Hostel
+                        <span><?php if (isset($err['type'])) echo $err['type']; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -107,12 +254,13 @@ if (isset($_GET['id'])) {
                         Booked:
                     </td>
                     <td>
-                        <input <?php if ($type == "yes") {
+                        <input <?php if ($booked == "yes") {
                                     echo "checked";
                                 } ?> type="radio" name="booked" value="yes">yes
-                        <input <?php if ($type == "no") {
+                        <input <?php if ($booked == "no") {
                                     echo "checked";
                                 } ?> type="radio" name="booked" value="no">no
+                        <span><?php if (isset($err['booked'])) echo $err['booked']; ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -121,6 +269,7 @@ if (isset($_GET['id'])) {
                     </td>
                     <td>
                         <textarea name="description" cols="22" rows="3" value="<?php echo $description; ?>"></textarea>
+                        <span><?php if (isset($err['description'])) echo $err['description']; ?></span>
                     </td>
                 </tr>
 
@@ -136,116 +285,6 @@ if (isset($_GET['id'])) {
             </table>
         </form>
 
-        <?php
-
-        //check whether the button is clicked or not
-        if (isset($_POST['submit'])) {
-
-            //1. get data from form
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $price = $_POST['price'];
-            $address = $_POST['address'];
-            $contact = $_POST['contact'];
-            $type = $_POST['type'];
-            $booked = $_POST['booked'];
-            $description = $_POST['description'];
-
-
-
-            //2.upload the image if selected
-            //check whether the upload button is clicked or not
-            if (isset($_FILES['image']['name'])) {
-                //get the details of the selected image
-                $image_name = $_FILES['image']['name']; //new image name
-
-                //check if the image is available or not
-                if ($image_name != "") {
-                    //image is available
-                    //i. uploading new image
-                    //get the details of the selected image(jpg,png,gif,etc)
-                    $ext = end(explode('.', $image_name));
-
-
-                    //create new name for the selected image
-                    $image_name = "Hostel-Name-" . rand(0000, 9999) . '.' . $ext; //this will be renamed image
-
-                    //2. upload the image
-                    //get the src path and destination path
-
-                    //source path is the current working directory of the image
-                    $src_path = $_FILES['image']['tmp_name'];
-
-                    //destination path for the image to be uploaded
-                    $dest_path = "../images/hostel/" . $image_name;
-
-                    //finally upload the hostel image
-                    $upload = move_uploaded_file($src_path, $dest_path);
-
-                    //check whether the image uploaded or not
-
-                    if ($upload == false) {
-                        //failed to upload the image
-                        //Redirect to add hostel page with error message
-                        $_session['upload'] = "<div class='error'>Failed to upload the image.</div>";
-                        header('Location:' . SITEURL . 'admin/add-hostel.php');
-
-                        //stop the process
-                        die();
-                    }
-                    //remove the image if new image is uploaded and current_image exists
-                    //remove current_image if available
-                    if ($current_image != "") {
-                        //current image is available
-                        //remove the image
-                        $remove_path = "../images/hostel/" . $current_image;
-
-                        $remove = unlink($remove_path);
-                        //check whether the image is removed or not
-                        if ($remove == false) {
-                            //failed to remove current_image
-                            $_SESSION['remove-failed'] = "<div class='error'>Failed to remove current image.</div>";
-                            //redirect to manage hostel
-                            header('Location:' . SITEURL . 'admin/manage-hostel.php');
-                            //stop process
-                            die();
-                        }
-                    }
-                } else {
-                    $image_name = $current_image; //setting the default image when image is not selected
-                }
-            } else {
-                $image_name = $current_image; //Default Image when Button is not Clicked
-            }
-            // update in database
-
-            $sql3 = "UPDATE  hostels SET
-                image_name = '$image_name',
-                name = '$name',
-                price = $price,
-                address= '$address',
-                contact = $contact,
-                type='$type',
-                booked = '$booked',
-                description = '$description'
-                
-                WHERE id = $id
-        ";
-            //execute query
-            $res3 = mysqli_query($conn, $sql3);
-            //check whether the query is executed or not
-            if ($res3 == true) {
-                //query executed successfully
-                $_SESSION['update'] = "<div class='success'>Hostel updated Successfully</div>";
-                header('Location:' . SITEURL . 'admin/manage-hostel.php');
-            } else {
-                //Failed to update hostel
-                $_SESSION['update'] = "<div class='error'>Failed to update hostel</div>";
-                header('Location:' . SITEURL . 'admin/manage-hostel.php');
-            }
-        }
-
-        ?>
 
     </div>
 </div>

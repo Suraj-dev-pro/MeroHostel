@@ -68,7 +68,7 @@
                         <p><label for="description">Description: </label><?php echo $description; ?></p>
                         <?php if (isset($_SESSION['user_id'])) { ?>
                             <div class="button">
-                                <a href="<?php echo SITEURL; ?>book.php" class="btn btn-primary">Book Hostel</a>
+                                <a href="<?php echo SITEURL; ?>confirm.php?id=<?php echo $id;?>" class="btn btn-primary">Book Hostel</a>
                             </div>
                         <?php } ?>
                     </div>

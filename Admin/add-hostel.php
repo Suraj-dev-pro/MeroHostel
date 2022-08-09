@@ -105,14 +105,13 @@ if (isset($_POST['submit'])) {
         $sql2 = "INSERT INTO hostels SET
                         image_name = '$image_name',
                         name = '$name',
-                        price = $price,
+                        price = '$price',
                         address= '$address',
                         contact='$contact',
                         type='$type',
                         booked='$booked',
-                        description='$description'
-                        
-                        ";
+                        description='$description';";
+
         //execute query
         $res2 = mysqli_query($conn, $sql2);
         //check whether data was inserted or not
@@ -168,7 +167,7 @@ if (isset($_POST['submit'])) {
                         Price:
                     </td>
                     <td>
-                        <input type="number" name="price" placeholder="Price" value="<?php echo isset($_POST['price'])?$_POST['price'] : ''; ?>" />
+                        <input type="number" name="price" placeholder="Price" value="<?php echo isset($_POST['price']) ? $_POST['price'] : ''; ?>" />
                         <span><?php if (isset($err['price'])) echo $err['price']; ?></span>
 
                     </td>
@@ -215,7 +214,7 @@ if (isset($_POST['submit'])) {
                         Description:
                     </td>
                     <td>
-                        <textarea name="description" cols="22" rows="3" placeholder="Enter your hostel description here" value="<?php echo isset($_POST['description']) ?$_POST['description']: ''?>"></textarea>
+                        <textarea name="description" cols="22" rows="3" placeholder="Enter your hostel description here" value="<?php echo isset($_POST['description']) ? $_POST['description'] : '' ?>"></textarea>
                         <span><?php if (isset($err['description'])) echo $err['description']; ?></span>
                     </td>
                 </tr>
@@ -227,12 +226,6 @@ if (isset($_POST['submit'])) {
                 </tr>
             </table>
         </form>
-        <?php
-
-        //check whether the button is clicked or not
-        if (isset($_POST['submit'])) {
-        }
-        ?>
 
     </div>
 </div>
