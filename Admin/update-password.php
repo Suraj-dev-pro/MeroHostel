@@ -33,14 +33,14 @@
                 <tr>
                     <td>New Password:</td>
                     <td>
-                        <input type="password" name="new_password" id="myPass" placeholder="New Password" maxlength="15" minlength="6" required/>
+                        <input type="password" name="new_password"  placeholder="New Password">
                     </td>
                 </tr>
 
                 <tr>
                     <td>Confirm Password: </td>
                     <td>
-                        <input type="password" name="confirm_password" id="myPass" placeholder="Confirm Password" axlength="15" minlength="6" required/>
+                        <input type="password" name="confirm_password" id="myPass" placeholder="Confirm Password">
                     </td>
                 </tr>
                 

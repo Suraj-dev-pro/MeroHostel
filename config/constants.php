@@ -1,7 +1,7 @@
 <?php
     ob_start();
   //session start
-    SESSION_START();
+    session_start();
   //create constants to store non repeating values
     define('SITEURL','http://localhost/merohostel/');
     define('LOCALHOST','localhost'); 

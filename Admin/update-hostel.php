@@ -58,7 +58,7 @@
                 <tr>
                     <td>Select New Image:</td>
                     <td>
-                        <input type="file" name="image" required/>
+                        <input type="file" name="image">
                     </td>
                 </tr>
                 <tr>
@@ -66,7 +66,7 @@
                         Name:
                     </td>
                     <td>
-                        <input type="text" name="name" value="<?php echo $name; ?>"required/>
+                        <input type="text" name="name" value="<?php echo $name; ?>">
                     </td>
                 </tr>
                 <tr>
@@ -74,7 +74,7 @@
                         Price:
                     </td>
                     <td>
-                        <input type="number" name="price" value="<?php echo $price; ?>" required/>
+                        <input type="number" name="price" value="<?php echo $price; ?>">
                     </td>
                 </tr>
                 <tr>
@@ -82,7 +82,7 @@
                         Address:
                     </td>
                     <td>
-                        <input type="text" name="address" value="<?php echo $address; ?>" required/>
+                        <input type="text" name="address" value="<?php echo $address; ?>">
                     </td>
                 </tr>
                 <tr>
@@ -90,7 +90,7 @@
                         Contact:
                     </td>
                     <td>
-                        <input type="number" name="contact" value="<?php echo $contact; ?>" required/ >
+                        <input type="number" name="contact" value="<?php echo $contact; ?>" >
                     </td>
                 </tr>
                 <tr>
@@ -98,8 +98,8 @@
                         Type:
                     </td>
                     <td>
-                        <input <?php if ($type == "boys") {echo "checked"; } ?> type="radio" name="type" value="boys" required/>Boys' Hostel
-                        <input <?php if ($type == "girls") {echo "checked";} ?> type="radio" name="type" value="girls" required/>Girls' Hostel
+                        <input <?php if ($type == "boys") {echo "checked"; } ?> type="radio" name="type" value="boys">Boys' Hostel
+                        <input <?php if ($type == "girls") {echo "checked";} ?> type="radio" name="type" value="girls">Girls' Hostel
                     </td>
                 </tr>
                 <tr>
@@ -107,8 +107,8 @@
                         Booked:
                     </td>
                     <td>
-                        <input <?php if ($type == "yes") {echo "checked"; } ?> type="radio" name="booked" value="yes" required>yes
-                        <input <?php if ($type == "no") {echo "checked";} ?> type="radio" name="booked" value="no" required>no
+                        <input <?php if ($type == "yes") {echo "checked"; } ?> type="radio" name="booked" value="yes">yes
+                        <input <?php if ($type == "no") {echo "checked";} ?> type="radio" name="booked" value="no">no
                     </td>
                 </tr>
                 <tr>
@@ -116,7 +116,7 @@
                         Description:
                     </td>
                     <td>
-                        <textarea name="description" cols="22" rows="3" value="<?php echo $description; ?>"required></textarea>
+                        <textarea name="description" cols="22" rows="3" value="<?php echo $description; ?>"></textarea>
                     </td>
                 </tr>
                
