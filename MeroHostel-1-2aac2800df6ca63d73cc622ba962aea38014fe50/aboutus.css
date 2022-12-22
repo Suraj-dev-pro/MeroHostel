@@ -1,0 +1,137 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.sectAbout {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ddd;
+}
+
+.containerAbout {
+    width: 80%;
+    min-height: 100vh;
+    display: block;
+    margin: auto;
+    padding-top: 100px;
+}
+
+.content-sectAbout {
+    float: none;
+    width: 55%;
+}
+
+.image-sectAbout {
+    float: none;
+    width: 40%;
+}
+
+.image-sectAbout img {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.content-sectAbout .titleAbout {
+    text-transform: uppercase;
+    font-size: 28px;
+}
+
+.content-sectAbout .contentAbout h3 {
+    margin-top: 20px;
+    color: #5d5d5d;
+    font-size: 21px;
+}
+
+.content-sectAbout .contentAbout p {
+    margin-top: 10px;
+    font-family: sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.content-sectAbout .contentAbout .buttonAbout {
+    margin-top: 60px;
+}
+
+.content-sectAbout .contentAbout .buttonAbout a {
+    background-color: #3d3d3d;
+    padding: 12px 40px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 25px;
+    letter-spacing: 1.5px;About
+}
+
+.content-sectAbout .contentAbout .buttonAbout a:hover {
+    background-color: #a52a2a;
+    color: #fff;
+}
+
+.content-sectAbout .socialAbout {
+    margin: 40px 12px;
+}
+
+.content-sectAbout .socialAbout i {
+    color: #a52a2a;
+    font-size: 30px;
+    padding: 0px 10px;
+}
+
+.content-sectAbout .socialAbout i:hover {
+    color: #3d3d3d;
+}
+
+.content-sectAbout .socialAbout {
+    margin-bottom: 0px;
+}
+
+@media screen and (max-width: 500px) {
+    .containerAbout {
+        width: 70%;
+        display: block;
+        margin: auto;
+        padding-top: 100px;
+    }
+    
+    .content-sectAbout {
+        float: border;
+        width: 100%;
+        display: block;
+        margin: auto;
+    }
+    
+    .image-sectAbout {
+        float: clear;
+        width: 200px;
+    }
+    
+    .image-sectAbout img {
+        width: 100%;
+        height: auto;
+        display: inline;
+        margin-top: 10px;
+        padding: 5px;
+    }
+    
+    .content-sectAbout .titleAbout {
+        text-align: center;
+        font-size: 19px;
+    }
+    
+    .content-sectAboout .contentAbout .buttonAbout {
+        text-align: center;
+    }
+    
+    .content-sectAbout .contentAbout .buttonAboout a {
+        padding: 9px 30px;
+    }
+    
+    .content-sectAbout .socialAbout {
+        margin-bottom: 0px;
+    }
+
+}
